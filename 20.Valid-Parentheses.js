@@ -16,14 +16,9 @@ var isValid = function (s) {
   for (const c of s) {
     if (opening.includes(c)) {
       stack.push(c);
-    } else {
-      const stackTop = stack[stack.length - 1];
-      const matchingTop = closingToOpeningMap[c];
-
-      if (stackTop === matchingTop) {
-        stack.pop();
-      } else {
-        stack.push(c);
+    } else if (closingToOpeningMap[c]) {
+      if (stack.pop() !== closingToOpeningMap[c]) {
+        return false;
       }
     }
   }
