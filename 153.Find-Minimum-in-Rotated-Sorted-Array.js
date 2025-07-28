@@ -6,34 +6,15 @@ var findMin = function (nums) {
   let left = 0;
   let right = nums.length - 1;
 
-  if (nums.length === 1) {
-    return nums[0];
-  }
-
-  if (nums[left] < nums[right]) {
-    return nums[left];
-  }
-
-  while (left <= right) {
+  while (left < right) {
     const mid = Math.floor((left + right) / 2);
 
-    const leftVal = nums[left];
-    const midVal = nums[mid];
-    const leftOfMid = nums[mid - 1];
-    const rightOfMid = nums[mid + 1];
-
-    if (midVal > rightOfMid) {
-      return rightOfMid;
-    }
-
-    if (leftOfMid > midVal) {
-      return midVal;
-    }
-
-    if (midVal > leftVal) {
+    if (nums[mid] > nums[right]) {
       left = mid + 1;
     } else {
-      right = mid - 1;
+      right = mid;
     }
   }
+
+  return nums[left];
 };
